@@ -14,10 +14,12 @@ export class AuthService{
     async login(login: LoginDTO): Promise<SessionDTO>{
         const { Correo, Clave } = login;
         const user = await this.repository.getUser(Correo);
+        //console.log(user);
         if(!user) 
             throw new Error('El correo ingresado no está registrado');
         
         const contra = AES_256.desencriptar(user.Clave);
+        //console.log(contra);
         if(Clave !== contra)
             throw new Error('La contraseña ingresada es incorrecta.');
         

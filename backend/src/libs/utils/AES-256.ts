@@ -7,6 +7,8 @@ export class AES_256 {
     }
 
     static desencriptar(clave: string){
+        //console.log(clave);
+        //console.log(process.env.AES_KEY);
         const key = crypto.AES.decrypt(clave, process.env.AES_KEY);
         return key.toString(crypto.enc.Utf8);
     }

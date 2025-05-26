@@ -18,6 +18,7 @@ export class AuthController {
         const body = req.body as LoginDTO;
         try {
             const session = await this.service.login(body);
+            //console.log(session);
             const token = jwt.sign(session, process.env.JWT_KEY!, {
                 expiresIn: '1h'
             });
