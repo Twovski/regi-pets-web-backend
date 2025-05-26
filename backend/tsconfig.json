@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+      "target": "ES2024",
+      "module": "CommonJS",
+      "skipLibCheck": true,
+      /* Bundler mode */
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "esModuleInterop": true,
+      /* Linting */
+      "strict": true,
+      "noImplicitAny": true,
+      "strictNullChecks": false,
+      "forceConsistentCasingInFileNames": true,
+      /* Direction */
+      "rootDir": "./src",
+      "baseUrl": "./src",
+      "outDir": "./dist",
+      "typeRoots": ["./node_modules/@types", "./src/libs/types"],
+      "paths": {
+        "#libs/*": [
+                "libs/*"
+            ],
+            "#utils/*": [
+                "libs/utils/*"
+            ],
+            "#config/*": [
+                "libs/config/*"
+            ],
+            "#root/*": [
+                "*"
+            ],
+            "#models/*": [
+              "../prisma/generated/*"
+            ]
+      }
+  }
+}
