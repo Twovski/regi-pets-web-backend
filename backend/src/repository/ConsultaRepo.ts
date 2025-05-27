@@ -33,7 +33,8 @@ export class ConsultaRepo implements IConsultaRepo{
                 },
                 cita_tratamiento: { 
                     include: { tratamiento: true },
-                }
+                },
+                medico: true
             }
          });
     }
@@ -66,7 +67,8 @@ export class ConsultaRepo implements IConsultaRepo{
                 },
                 cita_tratamiento: { 
                     include: { tratamiento: true },
-                }
+                },
+                medico: true
             },
             where: {
                 medico: {
@@ -84,7 +86,8 @@ export class ConsultaRepo implements IConsultaRepo{
                 },
                 cita_tratamiento: { 
                     include: { tratamiento: true },
-                }
+                },
+                medico: true
             },
             where: {
                 CitaID: citaID,

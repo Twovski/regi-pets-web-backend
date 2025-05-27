@@ -32,7 +32,12 @@ export class MedicoRepo implements IMedicoRepo{
     }
 
     async buscar(where: Prisma.medicoWhereInput): Promise<medico[]> {
-        return this.prisma.medico.findMany({ where });
+        return this.prisma.medico.findMany({ 
+            where,
+            include: {
+                veterinaria: true
+            },
+         });
     }
 
     async crear(medico: MedicoDTO): Promise<medico> {
@@ -75,6 +80,9 @@ export class MedicoRepo implements IMedicoRepo{
 
     async lista(vetID: number): Promise<medico[]> {
         return this.prisma.medico.findMany({
+            include: {
+                veterinaria: true
+            },
             where: { 
                 Status: true, 
                 VetID: vetID 
@@ -84,6 +92,9 @@ export class MedicoRepo implements IMedicoRepo{
 
     async obtener(medID: number, vetID: number): Promise<medico> {
         return this.prisma.medico.findUnique({
+            include: {
+                veterinaria: true
+            },
             where: {
                 MedID: medID,
                 VetID: vetID

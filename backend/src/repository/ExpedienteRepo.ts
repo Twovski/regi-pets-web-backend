@@ -27,7 +27,8 @@ export class ExpedienteRepo implements IExpedienteRepo {
                         cita_estudios: true,
                         cita_tratamiento: true
                     }
-                }
+                },
+                mascota: true
             } 
         });
     }

@@ -31,7 +31,12 @@ export class ClienteRepo implements IClienteRepo{
     }
 
     async buscar(where: Prisma.clienteWhereInput): Promise<cliente[]> {
-        return this.prisma.cliente.findMany({ where });
+        return this.prisma.cliente.findMany({ 
+            where,
+            include: {
+                veterinaria: true
+            },
+        });
     }
 
     async crear(cliente: ClienteDTO): Promise<cliente> {
@@ -53,6 +58,9 @@ export class ClienteRepo implements IClienteRepo{
 
     async lista(vetID: number): Promise<cliente[]> {
         return this.prisma.cliente.findMany({
+            include: {
+                veterinaria: true
+            },
             where: { 
                 Status: true, 
                 VetID: vetID 
@@ -62,6 +70,9 @@ export class ClienteRepo implements IClienteRepo{
 
     async obtener(cteID: number, vetID: number): Promise<cliente> {
         return this.prisma.cliente.findUnique({
+            include: {
+                veterinaria: true
+            },
             where: {
                 CteID: cteID,
                 VetID: vetID
