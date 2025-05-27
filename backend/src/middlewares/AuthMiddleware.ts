@@ -16,6 +16,15 @@ export class AuthMiddleware {
         next();
     }
 
+    BloquearAuth(req: Request, res: Response, next: NextFunction) {
+    if (req.session) {
+        res.status(400).json({ message: 'Ya hay una sesión activa.' });
+        return;
+    }
+
+    next();
+}
+
     CheckValidateSession(req: Request, res: Response, next: NextFunction) {
         if (!req.session) {
             res.status(401).send('No tienes una sesión activa. Por favor, inicia sesión para continuar.');

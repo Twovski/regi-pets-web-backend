@@ -58,6 +58,28 @@ export class AuthController {
         res.status(200).json(session);
     }
 
+    async Refrescar(req: Request, res: Response){
+        const { session } = req
+        if (!session) {
+            res.status(401).json({ message: 'Sesión expirada o no válida' });
+            return;
+        }
+
+        const newToken = jwt.sign(session, process.env.JWT_KEY!, {
+            expiresIn: '1h'
+        });
+
+        res
+            .cookie('access_token', newToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 1000 * 60 * 60
+            })
+            .status(200)
+            .json({ message: 'Token renovado' });
+    }
+
     async ChangePassword(req: Request, res: Response){
         const change = req.body as ChangePasswordDTO;
         change.Correo = req.session?.Correo;

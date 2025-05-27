@@ -6,3 +6,5 @@ dist
 /generated
 
 /generated
+
+/src/generated/prisma

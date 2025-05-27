@@ -10,8 +10,9 @@ const controller = new AuthController();
 const middleware = new AuthMiddleware();
 const global_middleware = new GlobalMiddleware();
 
-router.post('/login', global_middleware.Validacion(LoginSchema), controller.Login);
+router.post('/login', global_middleware.Validacion(LoginSchema), middleware.BloquearAuth, controller.Login);
 router.post('/logout', middleware.CheckValidateSession, controller.Logout);
+router.post('/refresh', middleware.GetSession, controller.Refrescar);
 router.get('/sesion', middleware.CheckValidateSession, controller.Session);
 router.put('/change-password', middleware.CheckValidateSession, global_middleware.Validacion(ChangePasswordSchema), controller.ChangePassword)
 
